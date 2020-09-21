@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> JAVASCRIPT EJERCICIOS 8-17</title>
+</head>
+
+<body>
+    <hr>
+    <h1>EJERCICIO 08 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para encontrar la cantidad de veces que se reemplaza un número dado con la suma de
+        sus dígitos hasta que se convierte en un número de un solo dígito. R:105</p>
+    <p id="enun08"></p>
+    <br>
+    <p>RESULTADO</p>
+    <p id="res08"></p>
+    <script>
+        // EJERCICIO 08 Sergio de Vega
+        function ej08_numero_reemplazos(num) {
+            var reemplazos = 0
+            while ( num.toString().length > 1){
+                var sumatorio = 0;
+                var numero = num.toString();
+                for (i = 1; i <= numero.length; i++){
+                    sumatorio = sumatorio + parseInt(numero.charAt(i-1));
+                }
+                num = sumatorio;
+                reemplazos++;
+            }
+            return reemplazos;
+        }
+
+        var array1 = [152 , 56 , 8 , 99999999999999, 1000000];
+        document.getElementById("enun08").innerHTML = "Números de ejemplo: " + array1.toString();
+        array1.forEach((x) => document.getElementById("res08").innerHTML += "Número de reemplazos para " + x + ": " + ej08_numero_reemplazos(x).toString() + "<br>")
+    </script>
+    
+    <br>
+    <hr>
+    <h1>EJERCICIO 09 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para dividir un número entero entre otro entero siempre que el resultado sea un
+        número entero y devuelva el resultado. R:106</p>
+    <p id="enun09"></p>
+    <br>
+    <p>RESULTADO</p>
+    <p id="res09"></p>
+    <script>
+        // EJERCICIO 09 Sergio de Vega
+        function ej09_divisionenteros(dividendo, divisor) {
+            if (Math.abs(dividendo % divisor) == 0) {
+                return (" es " + (dividendo / divisor))
+            } else {
+                return " no da un número entero";
+            }
+        }
+        var arr = [[15, 2], [14, 7], [4, 8], [-100, 5]];
+        var n = arr.length;
+        for (i = 1; i <= n; i++) document.getElementById("enun09").innerHTML += "Números " + arr[i-1][0] + " y " + arr[i-1][1] + "<br>";
+        for (i = 1; i <= n; i++)
+        document.getElementById("res09").innerHTML += "La división de " + arr[i-1][0] + " entre " + arr[i-1][1] + ej09_divisionenteros(arr[i-1][0],arr[i-1][1]) + ".<br>";
+
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 10 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para encontrar el número de pares ordenados formados por sus elementos de una
+        matriz dada de números enteros, de manera que un elemento del par sea divisible por el otro. Por ejemplo, la
+        salida de [1, 3, 2] -> 2 - (1,3), (1,2). La salida de [2, 4, 6] -> 2 - (2,4), (2,6) La salida de [2, 4, 16] -> 3
+        - (2,4), (2,16), (4,16). R:107</p>
+    <p id="enun10"></p>
+    <br>
+    <p>RESULTADO</p>
+    <p id="res10"></p>
+    <script>
+        // EJERCICIO 10 Sergio de Vega
+        function ej10_paresdiv(cadena) {
+            //Recorremos la cadena varias veces, desde cada número hasta el final de la misma, hasta que lleguemos al último número.
+            var resultado = "";
+            var cont_pares = 0;
+            for (i=0; i < cadena.length-1; i++) {
+                var n = i+1;
+                for (n = i+1 ; n <= cadena.length; n++) {
+                    if ((cadena[i]%cadena[n] == 0) || (cadena[n]%cadena[i] == 0)) {
+                        resultado += "(" + cadena[i] + ", " + cadena[n] +") ";
+                        cont_pares ++;
+                        n++;
+                    }
+                }
+            }
+            return [cont_pares, resultado];
+        }
+        var arr = [[5, 2, 6], [2, 3, 10, 15], [10], [3, 8, 5, 23, 10, 7, 14]];
+        for (x = 1; x <= arr.length; x++) document.getElementById("enun10").innerHTML += "Matriz "+ x + ": " + arr[x-1] + "<br>";
+        for (x = 1; x <= arr.length; x++) {
+            var solucion = ej10_paresdiv(arr[x-1]);
+
+            document.getElementById("res10").innerHTML += "Los pares divisibles de la cadena " + x + " son " + solucion[0] + ": " + solucion[1] + "<br>";
+        }
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 11 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para crear los productos escalares de dos vectores 3D dados. Nota: El producto
+        escalar es la suma de los productos de las entradas correspondientes de las dos secuencias de números. R:108</p>
+    <p id="enun11"></p>
+    <br>
+    <p>RESULTADO</p>
+    <p id="res11"></p>
+    <script>
+        // EJERCICIO 11 Sergio de Vega
+        function ej11_producto_escalar(vector1, vector2) {
+            return ((vector1[0] * vector2[0]) + (vector1[1] * vector2[1]) + (vector1[2] * vector2[2]));
+        }
+        var arrayV = [[[1, 2, 5], [2, 3, 7]], [[2, 1, 3], [4, 8, 6]]];
+        for (i = 0; i < arrayV.length; i++) document.getElementById("enun11").innerHTML += "Pareja " + (i+1) + ": V1(" + arrayV[i][0] + ") - V2(" + arrayV[i][1] + ")<br>";
+        for (i = 0; i < arrayV.length; i++) {
+            document.getElementById("res11").innerHTML += "Es producto escalar de la Pareja 1 es: " + ej11_producto_escalar(arrayV[i][0], arrayV[i][1]) + "<br>";
+        }
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 12 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para ordenar una matriz de todos los números primos entre 1 y un entero dado. R:109</p>
+    <p id="enun12"></p>
+    <br>
+
+    <p>RESULTADO</p>
+    <p id="res12"></p>
+    <script>
+        // EJERCICIO 12 Sergio de Vega
+        function ej12_esPrimo(num) {
+            for(var i=2;i<=num-1;i++) {
+                if(num%i==0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        function ej12_listaPrimos(numtope) {
+            var num = 2;
+            var arrayPrimos = [];
+            while ( num <= numtope){
+                if (ej12_esPrimo(num)) {
+                    arrayPrimos.push(num);
+                }   
+                num++;
+            }
+            return arrayPrimos;
+        }
+        var array1 = [27 , -5, 100];
+        document.getElementById("enun12").innerHTML = "Números de ejemplo: " + array1.toString();
+        array1.forEach((x) => document.getElementById("res12").innerHTML += "Los números primos hasta " + x + " son: " + ej12_listaPrimos(x).toString() + "<br>")
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 13 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para convertir temperaturas desde y hacia Grados Celsius y Fahrenheit. [Fórmula: c
+        / 5 = (f-32) / 9 [donde c = temperatura en grados Celsius yf = temperatura en Fahrenheit] Resultado esperado :
+        60 ° C son 140 ° F 45 ° F son 7.222222222222222 ° C. R:11</p>
+    <p id="enun13"></p>
+    <br>
+    <p>RESULTADO</p>
+    <p id="res13"></p>
+    <script>
+        // EJERCICIO 13 Sergio de Vega
+        function ej13_convertir_C2F(tempC) {
+            return ((tempC*9)/5)+32;
+        }
+        function ej13_convertir_F2C(tempF) {
+            return ((tempF-32)/9)*5;
+        }
+
+        var array1 = [" 27.4 º C ", " 60 º C", " 45 º F ", " -5 º C ", " 4c"];
+
+        for (let i = 0; i < array1.length; i++) {
+            document.getElementById("enun13").innerHTML += "Temperatura " + (i+1) + ": " + array1[i] +"<br>";
+            dato = array1[i];
+            dato = dato.replace("º","");
+            dato = dato.replace("F","");
+            dato = dato.replace("C","");
+            if (array1[i].includes("F")) {
+                document.getElementById("res13").innerHTML += array1[i] + " = " + ej13_convertir_F2C(dato).toString() + " º C.<br>"        
+            } else {
+                if (array1[i].includes("C")) {
+                    document.getElementById("res13").innerHTML += array1[i] + " = " + ej13_convertir_C2F(dato).toString() + " º F.<br>"        
+                }
+                else {
+                    document.getElementById("res13").innerHTML += array1[i] + " no es una temperatura reconocida<br>";
+                }
+            }
+        }
+
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 14 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para encontrar el número de valores pares en secuencia antes de la primera
+        aparición de un número dado. R:110</p>
+    <p id="enun14"></p>
+    <br>
+
+    <p>RESULTADO</p>
+    <p id="res14"></p>
+    <script>
+    // EJERCICIO 14 Sergio de Vega
+        function ej14_listaPares(numtope) {
+            var num = 0;
+            var cadena = "";
+            while ( num <= numtope){
+                if (num % 2 == 0) {
+                    cadena += num.toString() + ", ";
+                }
+                    num++;
+            }
+            return cadena.substring(0, cadena.length - 2);
+        }
+        var array1 = [17 , 89 , -4 , 6];
+        document.getElementById("enun14").innerHTML = "Números de ejemplo: " + array1.toString();
+        array1.forEach((x) => document.getElementById("res14").innerHTML += "Los números pares hasta el " + x + " son: " + ej14_listaPares(x).toString() + "<br>")
+    </script>
+
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 15 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para verificar un número de tres números dados donde dos números son iguales,
+        encuentre el tercero. R:111</p>
+    <p id="enun15"></p>
+    <br>
+
+    <p>RESULTADO</p>
+    <p id="res15"></p>
+    <script>
+        // EJERCICIO 15 Sergio de Vega
+        var array1 = [[1, 2, 2], [12, 7, 12], [0, 0, 156]];
+        for (i = 0; i < array1.length; i++) document.getElementById("enun15").innerHTML += "Grupo " + (i+1) + ": " + array1[i] + "<br>";
+
+        for (i = 0; i < array1.length; i++) {
+            var distinto = 0;
+            if (array1[i][0] == array1[i][1]) {
+                distinto = 2;
+            } else {
+                if (array1[i][1] == array1[i][2]) {
+                    distinto = 0;
+                } else {
+                    if (array1[i][0] == array1[i][2]){
+                        distinto = 1;                
+                    }
+                }
+            }
+            document.getElementById("res15").innerHTML += "El número diferente del grupo " + (i+1) + " es : " + array1[i][distinto] + "<br>";
+        }
+    </script>
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 16 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa de JavaScript para encontrar el número de ceros finales en la representación decimal del
+        factorial de un número dado. R:112</p>
+    <p id="enun16"></p>
+    <br>
+
+    <p>RESULTADO</p>
+    <p id="res16"></p>
+    <script>
+        // EJERCICIO 16 Sergio de Vega
+        function ej16_factorial (n) {
+        var total = 1; 
+        for (i=1; i<=n; i++) {
+            total = total * i; 
+        }
+        return total; 
+        }
+        function ej16_cerosfinales(numero) {
+            var cadena = numero.toString(10);
+            var contadorceros = 0;
+            for (let index = cadena.length - 1; index >= 0; index--) {
+                if (cadena.charAt(index) == 0) {
+                    contadorceros ++
+                } else {
+                    return contadorceros;
+                }
+            }
+            return contadorceros;
+        }
+        var array1 = [10, 5, 8];
+        document.getElementById("enun16").innerHTML = "Números de ejemplo: " + array1.toString();
+        for (let x = 0; x < array1.length; x++) {
+            const element = array1[x];
+            var resultado = ej16_factorial(element);
+
+            document.getElementById("res16").innerHTML += "Para el número " + element + " el factorial es: " + resultado + " y el nº de ceros es:" + ej16_cerosfinales(resultado) + "<br>";
+        }
+      
+    </script>
+    
+
+    <br>
+    <hr>
+    <h1>EJERCICIO 17 (Sergio de Vega)</h1>
+    <hr>
+    <p>Escriba un programa JavaScript para calcular la suma de n + n / 2 + n / 4 + n / 8 + .... donde n es un número
+        entero positivo y todas las divisiones son enteros. R:113</p>
+    <p id="enun17"></p>
+    <br>
+
+    <p>RESULTADO</p>
+    <p id="res17"></p>
+    <script>
+        // EJERCICIO 17 Sergio de Vega
+        function ej17_calcular(num) {
+            var resultado = num;
+            for (let potencia = 2; Math.trunc(num/potencia) > 0; potencia = potencia * 2) {
+                resultado += Math.trunc(num / potencia);              
+            }
+            return resultado;
+        }
+        var array1 = [17 , 89 , 6, 10];
+        document.getElementById("enun17").innerHTML = "Números de ejemplo: " + array1.toString();
+        for (let x = 0; x < array1.length; x++) {
+            const element = array1[x];
+            document.getElementById("res17").innerHTML += "Resultado para el número " + element + " = " + ej17_calcular(element) + "<br>";
+        }
+
+    </script>
+
+</body>
+
+</html>

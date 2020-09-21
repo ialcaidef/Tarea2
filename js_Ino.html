@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> JAVASCRIPT EJERCICIOS 1 al 7</title>
+</head>
+
+<body>
+    <hr>
+    <h1>EJERCICIO 1 (Inocente Alcaide)</h1>
+    <!--Inocente Alcaide-->
+    <hr>
+    <p>Escriba un programa JavaScript para mostrar el día y la hora actuales en el siguiente formato. Salida de muestra:
+        Hoy es: martes. Hora actual: 10 PM: 30: 38 R:1</p>
+    <br>
+    <p><strong>RESULTADO PRUEBAS</strong></p>
+    <p id="res1"></p>
+    <script>
+        var diasSemana = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+        var d = new Date();
+        var hora = d.getHours() > 12 ? d.getHours() - 12 + " PM" : d.getHours() + " AM";
+        document.getElementById("res1").innerHTML = "<b>Hoy es:</b> " + diasSemana[d.getDay()] + " <b>Hora actual:</b> " + hora + " : " + d.getMinutes() + " : " + d.getSeconds();
+
+    </script>
+
+    <hr>
+    <h1>EJERCICIO 2 (Inocente Alcaide)</h1>
+    <!--Inocente Alcaide-->
+    <hr>
+    <p>Escriba un programa JavaScript para calcular la multiplicación y división de dos números (entrada del usuario).
+        Formulario de ejemplo: Primer Número: 12 Segundo numero: 10 <Multiplique>
+            <Divida> El resultado es: 120 R:10</p>
+    <p id="enun2">Primer número: <input type="text" name="primerNum" id="idPrimerNum" maxlength=6 /></p>
+    <p id="enun22">Segundo número: <input type="text" name="segundoNum" id="idSegundoNum" maxlength=6 /></p>
+    <p id="enum222">
+        <button type="button" onclick="javascript:ej2Multiplicar();"><B>X</B></button>&nbsp;&nbsp;&nbsp;
+        <button type="button" onclick="javascript:ej2Dividir();"><B>&divide;</B></button>
+    </p>
+    <br>
+    <p><strong>RESULTADO</strong></p>
+    <p id="res2">
+        Valor: <input type="text" name="resultado" id="idResultado" />
+    </p>
+
+    <script>
+
+        function ej2Multiplicar() {
+
+            if (validar("idPrimerNum") == true && validar("idSegundoNum") == true) {
+
+                let p1 = document.getElementById("idPrimerNum").value;
+                let p2 = document.getElementById("idSegundoNum").value;
+
+                document.getElementById("idResultado").value = p1 * p2;
+            }
+        }
+
+        function ej2Dividir() {
+
+
+            if (validar("idPrimerNum") == true && validar("idSegundoNum") == true) {
+
+                let p1 = document.getElementById("idPrimerNum").value;
+                let p2 = document.getElementById("idSegundoNum").value;
+
+                document.getElementById("idResultado").value = p1 / p2;
+            }
+        }
+
+        function validar(campo) {
+            if (isNaN(document.getElementById(campo).value)) {
+                alert('No es un número');
+                document.getElementById(campo).focus();
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+
+    <hr>
+    <h1>EJERCICIO 3 (Inocente Alcaide)</h1>
+    <!--Inocente Alcaide-->
+    <hr>
+    <p>Escriba un programa JavaScript para comprobar si hay al menos un elemento que se encuentra en dos matrices
+        ordenadas de números enteros. R:100</p>
+    <p id="enun3">Primera matriz: <input type="text" name="Matriz1" id="idMatriz1" /></p>
+    <p id="enun33">Segunda matriz: <input type="text" name="Matriz2" id="idMatriz2" /></p>
+    <p id="enum222">
+        <button type="button" onclick="javascript:ej3Comprobar();"><B>Comprobar</B></button>
+    </p>
+    <br>
+    <p><strong>RESULTADO</strong></p>
+    <p id="res3"></p>
+    <script>
+        function ej3Comprobar() {
+            var array1 = document.getElementById("idMatriz1").value.split(",");
+            var array2 = document.getElementById("idMatriz2").value.split(",");
+
+            if (array1.length != array2.length) {
+                alert("Matrices de tamaño diferente");
+                document.getElementById("idMatriz1").focus();
+            }
+
+            //ordeno los arrays    
+            array1.sort();
+            array2.sort();
+
+            for (let i = 0; i < array1.length; i++) {
+                for (let j = 0; j < array2.length; j++) {
+                    if (array1[i] == array2[j]) {
+                        document.getElementById("res3").innerHTML = "El primer elemento que se encuentra en las dos matrices es " + array1[i];
+                        //break;
+                        return
+                    }
+                }
+            }
+            document.getElementById("res3").innerHTML = "No hay elementos iguales ";
+        }
+    </script>
+
+    <hr>
+    <h1>EJERCICIO 4 (Inocente Alcaide)</h1>
+    <!--Inocente Alcaide-->
+    <hr>
+    <p>Escriba un programa JavaScript para verificar si una cadena determinada contiene solo letras latinas y no hay dos
+        letras mayúsculas ni dos minúsculas en posiciones adyacentes. R:101</p>
+    <p id="enun4">Introduzca cadena: <input type="text" name="Cadena" id="idCadena" /></p>
+    <p id="enum44">
+        <button type="button" onclick="javascript:ej4Comprobar();"><B>Comprobar</B></button>
+    </p>
+    <br>
+    <p><strong>RESULTADO</strong></p>
+    <p id="res4"></p>
+    <script>
+        function ej4Comprobar() {
+            var str = document.getElementById("idCadena").value;
+            var patt = new RegExp(/(?!^.*[A-Z]{2,}.*$)(?!^.*[a-z]{2,}.*$)^[A-Za-z 0-9]*$/g);
+            var res = patt.test(str);
+            document.getElementById("res4").innerHTML = res;
+
+        }
+    </script>
+
+    <hr>
+    <h1>EJERCICIO 5 (Inocente Alcaide)</h1>
+    <!--Inocente Alcaide-->
+    <hr>
+    <p>Escriba un programa JavaScript para encontrar el número de inversiones de una matriz dada de enteros. Nota: Dos
+        elementos de la matriz a
+        almacenados en las posiciones i y j forman una inversión si a [i]> a [j] e i < j R:102</p>
+            <p id="enun5">Introduzca lista de números separados por coma: <input type="text" name="Matriz5"
+                    id="idMatriz5" /></p>
+            <p id="enum55">
+                <button type="button" onclick="javascript:ej5Encontrar();"><B>Encontrar</B></button>
+            </p>
+            <br>
+            <p><strong>RESULTADO</strong></p>
+            <p id="res5"></p>
+            <script>
+                function ej5Encontrar() {
+                    var array1 = document.getElementById("idMatriz5").value.split(",");
+                    var numInversiones = 0;
+                    var j = 0;
+
+                    for (let i = 0; i < array1.length - 1; i++) {
+                        j = i + 1;
+
+                        if (array1[i] > array1[j] && i < j) {
+                            numInversiones += 1;
+                        }
+
+
+                    }
+                    document.getElementById("res5").innerHTML = "El número de inversiones es: " + numInversiones;
+                }
+            </script>
+
+            <hr>
+            <h1>EJERCICIO 6 (Inocente Alcaide)</h1>
+            <!--Inocente Alcaide-->
+            <hr>
+            <p>Escriba un programa JavaScript para encontrar el número máximo de un entero positivo dado borrando
+                exactamente un dígito del número dado. R:103</p>
+            <p id="enun6">
+                Introduzca un número: <input type="text" name="Entero6" id="idEntero6" /><br><br>
+                Introduzca digito a borrar del anteerior número: <input type="text" name="Digito6" id="idDigito6"
+                    maxlength="1" /><br><br>
+                <button type="button" onclick="javascript:ej6Encontrar();"><B>Encontrar</B></button>
+            </p>
+            <br>
+            <p><strong>RESULTADO</strong></p>
+            <p id="res6"></p>
+            <script>
+                function ej6Encontrar() {
+                    var str = document.getElementById("idEntero6").value;
+                    var del = document.getElementById("idDigito6").value;
+                    var res = str.replace(del, "");
+                    var array6 = res.split("");
+                    var ordenado = array6.sort(deMayorAMenor);
+                    var unirArray = "";
+
+                    //se hace de esta forma porque no consigo que funcione el join
+                    for (let i = 0; i < ordenado.length; i++) {
+                        unirArray += ordenado[i];
+                    }
+
+                    document.getElementById("res6").innerHTML = "El número máximo es: " + unirArray;
+                }
+
+                function deMayorAMenor(elem1, elem2) {
+                    return elem2 - elem1;
+                }
+            </script>
+
+
+            <hr>
+            <h1>EJERCICIO 7 (Inocente Alcaide)</h1>
+            <!--Inocente Alcaide-->
+            <hr>
+            <p>Escriba un programa JavaScript para encontrar dos elementos de la matriz de modo que su diferencia
+                absoluta no sea mayor que un entero dado,
+                pero que esté lo más cerca posible de dicho entero. R:104</p>
+            <p id="enun7">
+                Introduzca una matriz de números separados por coma: <input type="text" name="Matriz7"
+                    id="idMatriz7" /><br><br>
+                Introduzca diferencia: <input type="text" name="Diferencia7" id="idDiferencia7" maxlength="2" /><br><br>
+                <button type="button" onclick="javascript:ej7Encontrar();"><B>Encontrar</B></button>
+            </p>
+            <br>
+            <p><strong>RESULTADO</strong></p>
+            <p id="res7"></p>
+            <script>
+                function ej7Encontrar() {
+                    var array7 = document.getElementById("idMatriz7").value.split(",");
+                    var dif7 = document.getElementById("idDiferencia7").value;
+                    var encontrado7 = false;
+
+                    for (let i7 = 0; i7 < array7.length; i7++) {
+                        for (let j7 = 1; j7 <= array7.length - 1; j7++) {
+
+                            if (Math.abs((array7[i7] - array7[j7])) <= dif7) {
+                                //document.getElementById("res7").innerHTML = "Primer elemento: " + array7[i7] + " ,segundo elemento: " + array7[j7] + " diferencia: " + array7[i7] - array7[j7];
+                                document.getElementById("res7").innerHTML += "Primer elemento: " + array7[i7] + " ,segundo elemento: " + array7[j7] + " diferencia: " + Math.abs(array7[i7] - array7[j7]) + "<br>";
+                                encontrado7 = true;
+                                //break;
+                            }
+                        }
+
+                        if (encontrado7 == true) {
+                            //break;
+                        }
+                    }
+
+                    if (encontrado7 == false) {
+                        document.getElementById("res7").innerHTML = "No se encuentran resultados que cumplan la condición ";
+                    }
+
+                }
+            </script>
+
+
+</body>
+
+</html>
